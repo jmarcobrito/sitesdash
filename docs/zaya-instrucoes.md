@@ -45,7 +45,7 @@ POST https://klyrhgfjncckxlqotvmr.supabase.co/functions/v1/salvar-lead
 **Headers:**
 ```
 Content-Type: application/json
-Authorization: Bearer [SUPABASE_ANON_KEY]
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtseXJoZ2ZqbmNja3hscW90dm1yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc5MDk5NTIsImV4cCI6MjA5MzQ4NTk1Mn0.iXv9mHhyxxb0mtS5WQBdU7wu3k1L37MJSOc7dAkzrJ4
 ```
 
 **Body (JSON):**
