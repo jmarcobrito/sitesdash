@@ -16,6 +16,7 @@ export default function LeadDetailPage({ params }: { params: { id: string } }) {
   const [saving, setSaving] = useState(false)
   const [sending, setSending] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
     fetchLead()
@@ -60,6 +61,13 @@ export default function LeadDetailPage({ params }: { params: { id: string } }) {
       .from('leads')
       .update({ sub_status: val || null })
       .eq('id', lead!.id)
+  }
+
+  async function handleDelete() {
+    if (!window.confirm(`Excluir o lead "${lead!.nome_negocio || lead!.nome}"? Esta ação não pode ser desfeita.`)) return
+    setDeleting(true)
+    await supabase.from('leads').delete().eq('id', lead!.id)
+    router.push('/')
   }
 
   async function handleSendPreview() {
@@ -251,6 +259,22 @@ export default function LeadDetailPage({ params }: { params: { id: string } }) {
           </div>
         </section>
       </main>
+
+      <footer className="max-w-4xl mx-auto px-6 pb-8">
+        <div className="border border-red-200 rounded-xl p-4 flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-red-700">Excluir lead</p>
+            <p className="text-xs text-red-400 mt-0.5">Remove permanentemente do dashboard</p>
+          </div>
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="text-sm px-4 py-2 font-medium text-red-600 border border-red-300 rounded-lg hover:bg-red-50 disabled:opacity-50 transition-colors"
+          >
+            {deleting ? 'Excluindo...' : 'Excluir lead'}
+          </button>
+        </div>
+      </footer>
     </div>
   )
 }
